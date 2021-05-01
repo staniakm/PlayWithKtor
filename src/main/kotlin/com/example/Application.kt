@@ -1,6 +1,6 @@
 package com.example
 
-import com.example.plugins.registerCustomerRoute
+import com.example.customer.registerCustomerRoute
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*

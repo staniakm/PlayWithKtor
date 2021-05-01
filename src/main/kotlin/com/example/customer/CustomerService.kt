@@ -1,6 +1,9 @@
-package com.example.plugins
+package com.example.customer
 
-private object Repository {
+import com.example.order.Order
+import com.example.order.OrderService
+
+private object CustomerRepository {
     private val customers = mutableMapOf<Int, Person>()
 
     init {
@@ -18,29 +21,19 @@ private object Repository {
     }
 }
 
-object Service2 {
-    private val database = mapOf(1 to listOf(Order(1, 1, 10)))
+object CustomerService {
 
-    fun findOrders(customerId: Int): List<Order> {
-        return database.getOrDefault(customerId, listOf())
-    }
-}
-
-object Service {
-
-    private val repo = Repository
-    private val service = Service2
+    private val repo = CustomerRepository
+    private val service = OrderService
 
     fun findById(id: Int?) =
         repo.findById(id)
 
     fun findAll() = repo.findAll()
 
-    fun findOrders(id: Int?): List<Order> {
+    fun findOrders(id: Int?): List<Order>? {
         return findById(id)?.let {
             service.findOrders(it.id)
-        }.let {
-            if (it.isNullOrEmpty()) listOf() else it
         }
     }
 }

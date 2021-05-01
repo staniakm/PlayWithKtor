@@ -1,4 +1,4 @@
-package com.example.plugins
+package com.example.customer
 
 import io.ktor.application.*
 import io.ktor.http.*
@@ -14,7 +14,7 @@ fun Application.registerCustomerRoute() {
 
 fun Route.customerRouting() {
 
-    val service = Service
+    val service = CustomerService
 
     route("/") {
         get {

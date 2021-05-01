@@ -5,7 +5,7 @@ import io.ktor.http.*
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
-import com.example.plugins.*
+import com.example.customer.*
 import kotlin.test.*
 import io.ktor.server.testing.*
 
