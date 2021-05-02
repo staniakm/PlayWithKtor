@@ -4,28 +4,30 @@ import com.example.order.Order
 import com.example.order.OrderService
 
 private object CustomerRepository {
-    private val customers = mutableMapOf<Int, Person>()
+    private val customers = mutableListOf<Person>()
 
     init {
-        customers[1] = Person(1, "Jan", "KOwalski")
-        customers[2] = Person(2, "Jan", "Nowak")
-        customers[3] = Person(3, "Jan", "Wańkowski")
+        with(customers) {
+            add(Person(1, "Jan", "KOwalski"))
+            add(Person(2, "Jan", "Nowak"))
+            add(Person(3, "Jan", "Wańkowski"))
+        }
     }
 
     fun findById(id: Int?): Person? {
-        return customers[id]
+        return customers.find { it.id == id }
     }
 
     fun findAll(): List<Person> {
-        return customers.map { it.value }.toList()
+        return customers.toList()
     }
 
     fun create(person: Person) {
-        val id = customers.maxOf { it.key } + 1
+        val id = customers.maxOf { it.id!! } + 1
         person.apply {
             this.id = id
         }
-        customers[id] = person
+        customers.add(person)
     }
 }
 
