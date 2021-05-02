@@ -36,16 +36,20 @@ object CustomerService {
 
     fun findById(id: Int?) =
         repo.findById(id)
+            ?.let {
+                PersonDTO.toDto(it)
+            }
+
 
     fun findAll() = repo.findAll()
 
     fun findOrders(id: Int?): List<Order>? {
-        return findById(id)?.let {
+        return repo.findById(id)?.let {
             service.findOrders(it.id!!)
         }
     }
 
-    fun store(person: Person) {
-        repo.create(person)
+    fun store(personDTO: PersonDTO) {
+        repo.create(PersonDTO.toEntity(personDTO))
     }
 }

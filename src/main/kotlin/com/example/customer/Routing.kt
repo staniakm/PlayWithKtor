@@ -22,9 +22,9 @@ fun Route.customerRouting() {
             call.respond(service.findAll())
         }
         post {
-            val person = call.receive<Person>()
+            val person = call.receive<PersonDTO>()
             service.store(person)
-            call.respond(HttpStatusCode.Created, "Customer created")
+            call.respond(HttpStatusCode.Created, "Customer created: ${person}")
         }
         route("{id}") {
             get {

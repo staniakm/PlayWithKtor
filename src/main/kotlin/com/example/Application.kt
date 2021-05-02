@@ -7,7 +7,7 @@ import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
-fun Application.module() {
+fun Application.module(testing:Boolean =  false) {
     install(ContentNegotiation) {
         json()
     }
