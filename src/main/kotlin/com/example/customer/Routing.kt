@@ -2,6 +2,7 @@ package com.example.customer
 
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -19,6 +20,11 @@ fun Route.customerRouting() {
     route("/") {
         get {
             call.respond(service.findAll())
+        }
+        post {
+            val person = call.receive<Person>()
+            service.store(person)
+            call.respond(HttpStatusCode.Created, "Customer created")
         }
         route("{id}") {
             get {

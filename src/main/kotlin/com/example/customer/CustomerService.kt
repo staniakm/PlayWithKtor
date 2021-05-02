@@ -19,6 +19,14 @@ private object CustomerRepository {
     fun findAll(): List<Person> {
         return customers.map { it.value }.toList()
     }
+
+    fun create(person: Person) {
+        val id = customers.maxOf { it.key } + 1
+        person.apply {
+            this.id = id
+        }
+        customers[id] = person
+    }
 }
 
 object CustomerService {
@@ -33,7 +41,11 @@ object CustomerService {
 
     fun findOrders(id: Int?): List<Order>? {
         return findById(id)?.let {
-            service.findOrders(it.id)
+            service.findOrders(it.id!!)
         }
+    }
+
+    fun store(person: Person) {
+        repo.create(person)
     }
 }
